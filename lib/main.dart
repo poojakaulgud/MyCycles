@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -45,7 +46,7 @@ class _MyCycleState extends State<MyCycles> {
         centerTitle: true,
         elevation: 5.0,
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: new Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -159,6 +160,7 @@ class _MyCycleState extends State<MyCycles> {
                 ),
                 calendarController: _controller,
               ),
+              
               new Column(
                 children: [
                   Row(
@@ -182,8 +184,7 @@ class _MyCycleState extends State<MyCycles> {
                       )
                     ],
                   ),
-                  Divider(),
-                  Divider(),
+                
                   Row(
                     children: <Widget>[
                       SizedBox(
@@ -206,7 +207,8 @@ class _MyCycleState extends State<MyCycles> {
                                   )))),
                     ],
                   ),
-                  Divider(),
+                  
+                 
                   Row(
                     children: <Widget>[
                       SizedBox(
@@ -229,7 +231,7 @@ class _MyCycleState extends State<MyCycles> {
                                   )))),
                     ],
                   ),
-                  Divider(),
+                 
                   Row(
                     children: <Widget>[
                       SizedBox(
@@ -252,11 +254,15 @@ class _MyCycleState extends State<MyCycles> {
                                   )))),
                     ],
                   ),
+                  
                 ],
               ),
+              
             ],
           ),
+        
         ),
+       
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.pink[50],
@@ -269,6 +275,112 @@ class _MyCycleState extends State<MyCycles> {
               icon: Icon(Icons.person), title: Text("About Us")),
         ],
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              padding: const EdgeInsets.fromLTRB(0, 2, 20, 2),
+              decoration: BoxDecoration(
+                color: Colors.pink[900],
+              ),
+              child: Row(
+                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    iconSize: 100,
+                    padding:EdgeInsets.fromLTRB(0.1, 2, 2, 2),
+                  icon: Image.asset('assets/logo.png'), onPressed: () => {}),
+                  Text("My Cycles",
+          style: TextStyle(fontFamily: 'Allura', fontSize: 40, color: Colors.pink[50]),),
+                  
+                ],),
+              ),
+              SizedBox(
+                  height: 20,
+
+                ),
+                
+                ListTile(
+                  
+                  tileColor: Colors.pink,
+                  
+                  trailing: Icon(Icons.add_box,color: Colors.pink[50],size: 40,),
+                  title: Text("Health Tips",
+                  style: TextStyle(fontSize: 20,color: Colors.pink[50], fontWeight: FontWeight.bold),)
+                  ,
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+
+                ),
+                
+                ListTile(
+                  
+                  tileColor: Colors.pink,
+                  
+                  trailing: Icon(Icons.plumbing, color: Colors.pink[50],size: 40,),
+                  title: Text("Medicine",
+                  style: TextStyle(fontSize: 20,color: Colors.pink[50], fontWeight: FontWeight.bold),)
+                  ,
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ListTile(
+                  
+                  tileColor: Colors.pink,
+                  
+                  trailing: Icon(Icons.chat_bubble_rounded, color: Colors.pink[50],size: 40,),
+                  title: Text("Ask For Help",
+                  style: TextStyle(fontSize: 20,color: Colors.pink[50], fontWeight: FontWeight.bold),)
+                  ,
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ListTile(
+                  
+                  tileColor: Colors.pink,
+                  
+                  trailing: Icon(Icons.email, color: Colors.pink[50],size: 40,),
+                  title: Text("Feedback",
+                  style: TextStyle(fontSize: 20,color: Colors.pink[50], fontWeight: FontWeight.bold),)
+                  ,
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(
+                  height: 190,
+                ),
+                ListTile(
+                  leading: Icon(Icons.arrow_back, color: Colors.black,size: 40,),
+                  title: Text("Back",
+                  style: TextStyle(fontSize: 20,color: Colors.black, fontWeight: FontWeight.bold,),textAlign: TextAlign.right,),
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                ),
+
+                
+   
+          ],
+          
+        ),
+        
+        
+
+        
+        )
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
