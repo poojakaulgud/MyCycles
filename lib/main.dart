@@ -104,16 +104,27 @@ class _MyCycleState extends State<MyCycles> {
               TableCalendar(
                 initialCalendarFormat: CalendarFormat.month,
                 calendarStyle: CalendarStyle(
-                    todayColor: Colors.blue,
+                    weekendStyle: TextStyle(
+                        color: Colors.pink[900], fontWeight: FontWeight.bold),
+                    outsideStyle: TextStyle(color: Colors.pink[900]),
+                    outsideWeekendStyle: TextStyle(color: Colors.pink[900]),
+                    weekdayStyle: TextStyle(
+                        color: Colors.pink[900], fontWeight: FontWeight.bold),
+                    todayColor: Colors.pink[900],
                     selectedColor: Theme.of(context).primaryColor,
                     todayStyle: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 22.0,
+                        fontSize: 20.0,
                         color: Colors.white)),
                 headerStyle: HeaderStyle(
                   centerHeaderTitle: true,
+                  titleTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                      fontSize: 22.0),
                   formatButtonDecoration: BoxDecoration(
-                    color: Colors.brown,
+                    color: Colors.pink[900],
                     borderRadius: BorderRadius.circular(22.0),
                   ),
                   formatButtonTextStyle: TextStyle(color: Colors.white),
@@ -128,7 +139,8 @@ class _MyCycleState extends State<MyCycles> {
                       margin: const EdgeInsets.all(5.0),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
+                          // color: Theme.of(context).primaryColor,
+                          color: Colors.pink[900],
                           borderRadius: BorderRadius.circular(8.0)),
                       child: Text(
                         date.day.toString(),
@@ -138,7 +150,7 @@ class _MyCycleState extends State<MyCycles> {
                       margin: const EdgeInsets.all(5.0),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Colors.pink[900],
                           borderRadius: BorderRadius.circular(8.0)),
                       child: Text(
                         date.day.toString(),
@@ -151,20 +163,93 @@ class _MyCycleState extends State<MyCycles> {
                 children: [
                   Row(
                     children: <Widget>[
-                      Expanded(
-                          child: TextButton(
-                        onPressed: () {},
-                        child: Text("Add Period"),
-                        style: TextButton.styleFrom(
-                          primary: Colors.pink[900],
-                        ),
-                      )),
-                      Expanded(
+                      SizedBox(
+                          height: 50,
+                          width: 300,
+                          child: Padding(
+                              padding: EdgeInsets.fromLTRB(100, 10, 40, 10),
+                              child: Text("Add Period",
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.pink[900],
+                                      fontWeight: FontWeight.bold)))),
+                      SizedBox(
                         child: FloatingActionButton(
                           onPressed: () {},
-                          child: Icon(Icons.add),
+                          backgroundColor: Colors.pink[900],
+                          child: Icon(Icons.add, color: Colors.pink[100]),
                         ),
                       )
+                    ],
+                  ),
+                  Divider(),
+                  Divider(),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(
+                          height: 60,
+                          width: 392,
+                          child: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.pink[900]),
+                                  ),
+                                  onPressed: () {},
+                                  child: Text(
+                                    "TEMPERATURE",
+                                    style: TextStyle(
+                                        color: Colors.pink[200],
+                                        fontWeight: FontWeight.bold),
+                                  )))),
+                    ],
+                  ),
+                  Divider(),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(
+                          height: 60,
+                          width: 392,
+                          child: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.pink[900]),
+                                  ),
+                                  onPressed: () {},
+                                  child: Text(
+                                    "MOOD",
+                                    style: TextStyle(
+                                        color: Colors.pink[200],
+                                        fontWeight: FontWeight.bold),
+                                  )))),
+                    ],
+                  ),
+                  Divider(),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(
+                          height: 60,
+                          width: 392,
+                          child: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.pink[900]),
+                                  ),
+                                  onPressed: () {},
+                                  child: Text(
+                                    "WEIGHT",
+                                    style: TextStyle(
+                                        color: Colors.pink[200],
+                                        fontWeight: FontWeight.bold),
+                                  )))),
                     ],
                   ),
                 ],
@@ -172,6 +257,17 @@ class _MyCycleState extends State<MyCycles> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.pink[50],
+        selectedItemColor: Colors.pink[900],
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.phone), title: Text("Contact")),
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), title: Text("About Us")),
+        ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
