@@ -2,6 +2,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+var fsi = FirebaseFirestore.instance;
 
 const magenta = const Color(0x8e3a59);
 void main() {
@@ -29,359 +32,391 @@ class _MyCycleState extends State<MyCycles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          new SizedBox(
-            height: 100.0,
-            width: 80.0,
-            child: new IconButton(
-                icon: Image.asset('assets/logo.png'), onPressed: () => {}),
+        appBar: AppBar(
+          actions: [
+            new SizedBox(
+              height: 100.0,
+              width: 80.0,
+              child: new IconButton(
+                  icon: Image.asset('assets/logo.png'), onPressed: () => {}),
+            ),
+          ],
+          title: Text(
+            "My Cycles",
+            style: TextStyle(fontFamily: 'Allura', fontSize: 30),
           ),
-        ],
-        title: Text(
-          "My Cycles",
-          style: TextStyle(fontFamily: 'Allura', fontSize: 30),
+          backgroundColor: Colors.pink[900],
+          centerTitle: true,
+          elevation: 5.0,
         ),
-        backgroundColor: Colors.pink[900],
-        centerTitle: true,
-        elevation: 5.0,
-      ),
-      body: SingleChildScrollView(
-        child: new Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment(-1.0, 0.0),
-              end: Alignment(1.0, 0.0),
-              stops: [
-                0.0,
-                0.1,
-                0.1,
-                0.2,
-                0.2,
-                0.3,
-                0.3,
-                0.4,
-                0.4,
-                0.5,
-                0.5,
-                0.6,
-                0.6,
-                0.7,
-                0.7,
-                0.8,
-                0.8,
-                0.9,
-                0.9,
-                1
+        body: SingleChildScrollView(
+          child: new Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment(-1.0, 0.0),
+                end: Alignment(1.0, 0.0),
+                stops: [
+                  0.0,
+                  0.1,
+                  0.1,
+                  0.2,
+                  0.2,
+                  0.3,
+                  0.3,
+                  0.4,
+                  0.4,
+                  0.5,
+                  0.5,
+                  0.6,
+                  0.6,
+                  0.7,
+                  0.7,
+                  0.8,
+                  0.8,
+                  0.9,
+                  0.9,
+                  1
+                ],
+                colors: [
+                  Colors.pink[100],
+                  Colors.pink[100],
+                  Colors.pink[50],
+                  Colors.pink[50],
+                  Colors.pink[100],
+                  Colors.pink[100],
+                  Colors.pink[50],
+                  Colors.pink[50],
+                  Colors.pink[100],
+                  Colors.pink[100],
+                  Colors.pink[50],
+                  Colors.pink[50],
+                  Colors.pink[100],
+                  Colors.pink[100],
+                  Colors.pink[50],
+                  Colors.pink[50],
+                  Colors.pink[100],
+                  Colors.pink[100],
+                  Colors.pink[50],
+                  Colors.pink[50],
+                ],
+                tileMode: TileMode.repeated,
+              ),
+            ),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                TableCalendar(
+                  initialCalendarFormat: CalendarFormat.month,
+                  calendarStyle: CalendarStyle(
+                      weekendStyle: TextStyle(
+                          color: Colors.pink[900], fontWeight: FontWeight.bold),
+                      outsideStyle: TextStyle(color: Colors.pink[900]),
+                      outsideWeekendStyle: TextStyle(color: Colors.pink[900]),
+                      weekdayStyle: TextStyle(
+                          color: Colors.pink[900], fontWeight: FontWeight.bold),
+                      todayColor: Colors.pink[900],
+                      selectedColor: Theme.of(context).primaryColor,
+                      todayStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                          color: Colors.white)),
+                  headerStyle: HeaderStyle(
+                    centerHeaderTitle: true,
+                    titleTextStyle: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
+                        fontSize: 22.0),
+                    formatButtonDecoration: BoxDecoration(
+                      color: Colors.pink[900],
+                      borderRadius: BorderRadius.circular(22.0),
+                    ),
+                    formatButtonTextStyle: TextStyle(color: Colors.white),
+                    formatButtonShowsNext: false,
+                  ),
+                  startingDayOfWeek: StartingDayOfWeek.monday,
+                  onDaySelected: (date, events, _) {
+                    print(date.toUtc());
+                  },
+                  builders: CalendarBuilders(
+                    selectedDayBuilder: (context, date, events) => Container(
+                        margin: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            // color: Theme.of(context).primaryColor,
+                            color: Colors.pink[900],
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: Text(
+                          date.day.toString(),
+                          style: TextStyle(color: Colors.white),
+                        )),
+                    todayDayBuilder: (context, date, events) => Container(
+                        margin: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.pink[900],
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: Text(
+                          date.day.toString(),
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+                  calendarController: _controller,
+                ),
+                Divider(),
+                Divider(),
+                new Column(
+                  children: [
+                    Row(
+                      children: <Widget>[
+                        SizedBox(
+                            height: 50,
+                            width: 300,
+                            child: Padding(
+                                padding: EdgeInsets.fromLTRB(100, 10, 40, 10),
+                                child: Text("Add Period",
+                                    style: TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.pink[900],
+                                        fontWeight: FontWeight.bold)))),
+                        Divider(),
+                        SizedBox(
+                          child: FloatingActionButton(
+                            onPressed: () {},
+                            backgroundColor: Colors.pink[900],
+                            child: Icon(Icons.add, color: Colors.pink[100]),
+                          ),
+                        )
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(
+                            height: 60,
+                            width: 392,
+                            child: Padding(
+                                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.pink[900]),
+                                    ),
+                                    onPressed: () {},
+                                    child: Text(
+                                      "TEMPERATURE",
+                                      style: TextStyle(
+                                          color: Colors.pink[200],
+                                          fontWeight: FontWeight.bold),
+                                    )))),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(
+                            height: 60,
+                            width: 392,
+                            child: Padding(
+                                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.pink[900]),
+                                    ),
+                                    onPressed: () {},
+                                    child: Text(
+                                      "MOOD",
+                                      style: TextStyle(
+                                          color: Colors.pink[200],
+                                          fontWeight: FontWeight.bold),
+                                    )))),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(
+                            height: 60,
+                            width: 392,
+                            child: Padding(
+                                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.pink[900]),
+                                    ),
+                                    onPressed: () {},
+                                    child: Text(
+                                      "WEIGHT",
+                                      style: TextStyle(
+                                          color: Colors.pink[200],
+                                          fontWeight: FontWeight.bold),
+                                    )))),
+                      ],
+                    ),
+                  ],
+                ),
               ],
-              colors: [
-                Colors.pink[100],
-                Colors.pink[100],
-                Colors.pink[50],
-                Colors.pink[50],
-                Colors.pink[100],
-                Colors.pink[100],
-                Colors.pink[50],
-                Colors.pink[50],
-                Colors.pink[100],
-                Colors.pink[100],
-                Colors.pink[50],
-                Colors.pink[50],
-                Colors.pink[100],
-                Colors.pink[100],
-                Colors.pink[50],
-                Colors.pink[50],
-                Colors.pink[100],
-                Colors.pink[100],
-                Colors.pink[50],
-                Colors.pink[50],
-              ],
-              tileMode: TileMode.repeated,
             ),
           ),
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TableCalendar(
-                initialCalendarFormat: CalendarFormat.month,
-                calendarStyle: CalendarStyle(
-                    weekendStyle: TextStyle(
-                        color: Colors.pink[900], fontWeight: FontWeight.bold),
-                    outsideStyle: TextStyle(color: Colors.pink[900]),
-                    outsideWeekendStyle: TextStyle(color: Colors.pink[900]),
-                    weekdayStyle: TextStyle(
-                        color: Colors.pink[900], fontWeight: FontWeight.bold),
-                    todayColor: Colors.pink[900],
-                    selectedColor: Theme.of(context).primaryColor,
-                    todayStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        color: Colors.white)),
-                headerStyle: HeaderStyle(
-                  centerHeaderTitle: true,
-                  titleTextStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                      fontSize: 22.0),
-                  formatButtonDecoration: BoxDecoration(
-                    color: Colors.pink[900],
-                    borderRadius: BorderRadius.circular(22.0),
-                  ),
-                  formatButtonTextStyle: TextStyle(color: Colors.white),
-                  formatButtonShowsNext: false,
-                ),
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                onDaySelected: (date, events, _) {
-                  print(date.toUtc());
-                },
-                builders: CalendarBuilders(
-                  selectedDayBuilder: (context, date, events) => Container(
-                      margin: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          // color: Theme.of(context).primaryColor,
-                          color: Colors.pink[900],
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Text(
-                        date.day.toString(),
-                        style: TextStyle(color: Colors.white),
-                      )),
-                  todayDayBuilder: (context, date, events) => Container(
-                      margin: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.pink[900],
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Text(
-                        date.day.toString(),
-                        style: TextStyle(color: Colors.white),
-                      )),
-                ),
-                calendarController: _controller,
-              ),
-              
-              new Column(
-                children: [
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                          height: 50,
-                          width: 300,
-                          child: Padding(
-                              padding: EdgeInsets.fromLTRB(100, 10, 40, 10),
-                              child: Text("Add Period",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.pink[900],
-                                      fontWeight: FontWeight.bold)))),
-                      SizedBox(
-                        child: FloatingActionButton(
-                          onPressed: () {},
-                          backgroundColor: Colors.pink[900],
-                          child: Icon(Icons.add, color: Colors.pink[100]),
-                        ),
-                      )
-                    ],
-                  ),
-                
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                          height: 60,
-                          width: 392,
-                          child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              child: TextButton(
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.pink[900]),
-                                  ),
-                                  onPressed: () {},
-                                  child: Text(
-                                    "TEMPERATURE",
-                                    style: TextStyle(
-                                        color: Colors.pink[200],
-                                        fontWeight: FontWeight.bold),
-                                  )))),
-                    ],
-                  ),
-                  
-                 
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                          height: 60,
-                          width: 392,
-                          child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              child: TextButton(
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.pink[900]),
-                                  ),
-                                  onPressed: () {},
-                                  child: Text(
-                                    "MOOD",
-                                    style: TextStyle(
-                                        color: Colors.pink[200],
-                                        fontWeight: FontWeight.bold),
-                                  )))),
-                    ],
-                  ),
-                 
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                          height: 60,
-                          width: 392,
-                          child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              child: TextButton(
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.pink[900]),
-                                  ),
-                                  onPressed: () {},
-                                  child: Text(
-                                    "WEIGHT",
-                                    style: TextStyle(
-                                        color: Colors.pink[200],
-                                        fontWeight: FontWeight.bold),
-                                  )))),
-                    ],
-                  ),
-                  
-                ],
-              ),
-              
-            ],
-          ),
-        
         ),
-       
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pink[50],
-        selectedItemColor: Colors.pink[900],
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.phone), title: Text("Contact")),
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text("About Us")),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              padding: const EdgeInsets.fromLTRB(0, 2, 20, 2),
-              decoration: BoxDecoration(
-                color: Colors.pink[900],
-              ),
-              child: Row(
-                mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    iconSize: 100,
-                    padding:EdgeInsets.fromLTRB(0.1, 2, 2, 2),
-                  icon: Image.asset('assets/logo.png'), onPressed: () => {}),
-                  Text("My Cycles",
-          style: TextStyle(fontFamily: 'Allura', fontSize: 40, color: Colors.pink[50]),),
-                  
-                ],),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.pink[50],
+          selectedItemColor: Colors.pink[900],
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.phone), title: Text("Contact")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home), title: Text("Home")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person), title: Text("About Us")),
+          ],
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                padding: const EdgeInsets.fromLTRB(0, 2, 20, 2),
+                decoration: BoxDecoration(
+                  color: Colors.pink[900],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                        iconSize: 100,
+                        padding: EdgeInsets.fromLTRB(0.1, 2, 2, 2),
+                        icon: Image.asset('assets/logo.png'),
+                        onPressed: () => {}),
+                    Text(
+                      "My Cycles",
+                      style: TextStyle(
+                          fontFamily: 'Allura',
+                          fontSize: 40,
+                          color: Colors.pink[50]),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
-                  height: 20,
-
+                height: 20,
+              ),
+              ListTile(
+                tileColor: Colors.pink[900],
+                trailing: Icon(
+                  Icons.add_box,
+                  color: Colors.pink[50],
+                  size: 40,
                 ),
-                
-                ListTile(
-                  
-                  tileColor: Colors.pink,
-                  
-                  trailing: Icon(Icons.add_box,color: Colors.pink[50],size: 40,),
-                  title: Text("Health Tips",
-                  style: TextStyle(fontSize: 20,color: Colors.pink[50], fontWeight: FontWeight.bold),)
-                  ,
-                  onTap: (){
+                title: Text(
+                  "Health Tips",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.pink[50],
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ListTile(
+                tileColor: Colors.pink[900],
+                trailing: Icon(
+                  Icons.plumbing,
+                  color: Colors.pink[50],
+                  size: 40,
+                ),
+                title: Text(
+                  "Medicine",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.pink[50],
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ListTile(
+                tileColor: Colors.pink[900],
+                trailing: Icon(
+                  Icons.chat_bubble_rounded,
+                  color: Colors.pink[50],
+                  size: 40,
+                ),
+                title: Text(
+                  "Ask For Help",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.pink[50],
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ListTile(
+                tileColor: Colors.pink[900],
+                trailing: Icon(
+                  Icons.email,
+                  color: Colors.pink[50],
+                  size: 40,
+                ),
+                title: Text(
+                  "Feedback",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.pink[50],
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              // SizedBox(
+              //   height: 190,
+              // ),
+              Expanded(
+                  child: Align(
+                alignment: Alignment.bottomCenter,
+                child: ListTile(
+                  leading: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: 40,
+                  ),
+                  title: Text(
+                    "Back",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+                  onTap: () {
                     Navigator.pop(context);
                   },
                 ),
-                SizedBox(
-                  height: 20,
-
-                ),
-                
-                ListTile(
-                  
-                  tileColor: Colors.pink,
-                  
-                  trailing: Icon(Icons.plumbing, color: Colors.pink[50],size: 40,),
-                  title: Text("Medicine",
-                  style: TextStyle(fontSize: 20,color: Colors.pink[50], fontWeight: FontWeight.bold),)
-                  ,
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ListTile(
-                  
-                  tileColor: Colors.pink,
-                  
-                  trailing: Icon(Icons.chat_bubble_rounded, color: Colors.pink[50],size: 40,),
-                  title: Text("Ask For Help",
-                  style: TextStyle(fontSize: 20,color: Colors.pink[50], fontWeight: FontWeight.bold),)
-                  ,
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ListTile(
-                  
-                  tileColor: Colors.pink,
-                  
-                  trailing: Icon(Icons.email, color: Colors.pink[50],size: 40,),
-                  title: Text("Feedback",
-                  style: TextStyle(fontSize: 20,color: Colors.pink[50], fontWeight: FontWeight.bold),)
-                  ,
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-                SizedBox(
-                  height: 190,
-                ),
-                ListTile(
-                  leading: Icon(Icons.arrow_back, color: Colors.black,size: 40,),
-                  title: Text("Back",
-                  style: TextStyle(fontSize: 20,color: Colors.black, fontWeight: FontWeight.bold,),textAlign: TextAlign.right,),
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                ),
-
-                
-   
-          ],
-          
-        ),
-        
-        
-
-        
+              ))
+            ],
+          ),
         )
-      // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        // This trailing comma makes auto-formatting nicer for build methods.
+        );
   }
 }
