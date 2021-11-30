@@ -218,7 +218,10 @@ class _MyCycleState extends State<MyCycles> {
                                           MaterialStateProperty.all<Color>(
                                               Colors.pink[900]),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      _displayTextInputDialog(
+                                          context, "Temperature");
+                                    },
                                     child: Text(
                                       "TEMPERATURE",
                                       style: TextStyle(
@@ -241,7 +244,9 @@ class _MyCycleState extends State<MyCycles> {
                                           MaterialStateProperty.all<Color>(
                                               Colors.pink[900]),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      _displayTextInputDialog(context, "Mood");
+                                    },
                                     child: Text(
                                       "MOOD",
                                       style: TextStyle(
@@ -264,7 +269,10 @@ class _MyCycleState extends State<MyCycles> {
                                           MaterialStateProperty.all<Color>(
                                               Colors.pink[900]),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      _displayTextInputDialog(
+                                          context, "Weight");
+                                    },
                                     child: Text(
                                       "WEIGHT",
                                       style: TextStyle(
