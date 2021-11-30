@@ -1,11 +1,14 @@
 // @dart=2.9
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+// import 'package:my_cycles/aboutus.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 var fsi = FirebaseFirestore.instance;
 
+int _currentIndex = 0;
+int _pageIndex = 0;
 const magenta = const Color(0x8e3a59);
 void main() {
   runApp(
@@ -22,6 +25,17 @@ class MyCycles extends StatefulWidget {
 
 class _MyCycleState extends State<MyCycles> {
   CalendarController _controller;
+  TextEditingController _textFieldController = TextEditingController();
+  int _selectedIndex = 0;
+  final List<Widget> _children = [
+    MyCycles(),
+    // AboutUs()
+  ];
+
+  _OnTap() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => _children[_currentIndex]));
+  }
 
   @override
   void initState() {
@@ -266,17 +280,26 @@ class _MyCycleState extends State<MyCycles> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.pink[50],
-          selectedItemColor: Colors.pink[900],
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.phone), title: Text("Contact")),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text("Home")),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), title: Text("About Us")),
-          ],
-        ),
+            backgroundColor: Colors.pink[50],
+            selectedItemColor: Colors.pink[900],
+            unselectedItemColor: Colors.black,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home), title: Text("Home")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.phone), title: Text("Contact")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), title: Text("About Us")),
+            ],
+            type: BottomNavigationBarType.shifting,
+            currentIndex: _pageIndex,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+              _OnTap();
+            },
+            elevation: 5),
         drawer: Drawer(
           child: ListView(
             children: [
@@ -418,5 +441,57 @@ class _MyCycleState extends State<MyCycles> {
         )
         // This trailing comma makes auto-formatting nicer for build methods.
         );
+  }
+
+  String codeDialog;
+  String valueText;
+  _displayTextInputDialog(BuildContext context, String heading) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(heading),
+            backgroundColor: Colors.pink[50],
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "Enter your " + heading),
+            ),
+            actions: <Widget>[
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.pink[900]),
+                ),
+                child: Text(
+                  'CANCEL',
+                  style: TextStyle(color: Colors.pink[50]),
+                ),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.pink[900]),
+                ),
+                child: Text('SUBMIT', style: TextStyle(color: Colors.pink[50])),
+                onPressed: () {
+                  setState(() {
+                    codeDialog = valueText;
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+          );
+        });
   }
 }
