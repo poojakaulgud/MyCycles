@@ -1,11 +1,11 @@
 // @dart=2.9
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// import 'package:my_cycles/aboutus.dart';
+import 'package:my_cycles/aboutus.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-var fsi = FirebaseFirestore.instance;
+// var fsi = FirebaseFirestore.instance;
 
 int _currentIndex = 0;
 int _pageIndex = 0;
@@ -29,7 +29,7 @@ class _MyCycleState extends State<MyCycles> {
   int _selectedIndex = 0;
   final List<Widget> _children = [
     MyCycles(),
-    // AboutUs()
+    AboutUs()
   ];
 
   _OnTap() {
