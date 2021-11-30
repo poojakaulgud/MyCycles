@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "763354961337",
+    "project_id": "mycycles-b4708",
+    "storage_bucket": "mycycles-b4708.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763354961337:android:7d028500c4f4c64d141268",
+        "android_client_info": {
+          "package_name": "com.ap.mycycles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763354961337-ou8l061n9142tjam5akblj43dvb3cpn6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnNGutlIWpDVkdOvGo6VqISBYWa8RY7qY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763354961337-ou8l061n9142tjam5akblj43dvb3cpn6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
