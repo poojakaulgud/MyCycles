@@ -33,6 +33,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   contactus: ^1.1.9
   readmore: ^2.1.0
+  flutter_rating_bar: ^3.0.141
   # contactus: ^1.2.0
 
 dev_dependencies:

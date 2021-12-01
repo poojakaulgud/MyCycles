@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_cycles/aboutus.dart';
 import 'package:my_cycles/addPeriod.dart';
+import 'package:my_cycles/feedback.dart';
 import 'package:my_cycles/community.dart';
 import 'package:my_cycles/healthtips.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -12,8 +13,8 @@ import 'package:firebase_core/firebase_core.dart';
 FirebaseFirestore fsi = FirebaseFirestore.instance;
 
 const magenta = const Color(0x8e3a59);
-int _currentIndex = 0;
-int _pageIndex = 0;
+int _currentIndex = 1;
+int _pageIndex = 1;
 void main() async {
   // await Firebase.initializeApp();
   runApp(
@@ -31,7 +32,7 @@ class MyCycles extends StatefulWidget {
 class _MyCycleState extends State<MyCycles> {
   CalendarController _controller;
   TextEditingController _textFieldController = TextEditingController();
-  final List<Widget> _children = [MyCycles(), Community(), AboutUs()];
+  final List<Widget> _children = [Community(), MyCycles(), AboutUs()];
   bool _initialized = false;
   bool _error = false;
   void initializeFlutterFire() async {
@@ -316,16 +317,17 @@ class _MyCycleState extends State<MyCycles> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.pink[50],
+            backgroundColor: Colors.pink[100],
             selectedItemColor: Colors.pink[900],
             unselectedItemColor: Colors.black,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
+                  icon: Icon(Icons.escalator_warning),
+                  title: Text("Community")),
+              BottomNavigationBarItem(
                   icon: Icon(Icons.home), title: Text("Home")),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.phone), title: Text("Contact")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), title: Text("About Us")),
+                  icon: Icon(Icons.people), title: Text("About Us")),
             ],
             type: BottomNavigationBarType.shifting,
             currentIndex: _pageIndex,
@@ -336,146 +338,157 @@ class _MyCycleState extends State<MyCycles> {
               _OnTap();
             },
             elevation: 5),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              DrawerHeader(
-                padding: const EdgeInsets.fromLTRB(0, 2, 20, 2),
-                decoration: BoxDecoration(
-                  color: Colors.pink[900],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        iconSize: 100,
-                        padding: EdgeInsets.fromLTRB(0.1, 2, 2, 2),
-                        icon: Image.asset('assets/logo.png'),
-                        onPressed: () => {}),
-                    Text(
-                      "My Cycles",
+        drawer: Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: Colors
+                  .pink[100], //This will change the drawer background to blue.
+              //other styles
+            ),
+            child: Drawer(
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                    padding: const EdgeInsets.fromLTRB(0, 2, 20, 2),
+                    decoration: BoxDecoration(
+                      color: Colors.pink[900],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                            iconSize: 100,
+                            padding: EdgeInsets.fromLTRB(0.1, 2, 2, 2),
+                            icon: Image.asset('assets/logo.png'),
+                            onPressed: () => {}),
+                        Text(
+                          "My Cycles",
+                          style: TextStyle(
+                              fontFamily: 'Allura',
+                              fontSize: 40,
+                              color: Colors.pink[50]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    tileColor: Colors.pink[900],
+                    trailing: Icon(
+                      Icons.add_box,
+                      color: Colors.pink[100],
+                      size: 40,
+                    ),
+                    title: Text(
+                      "Health Tips",
                       style: TextStyle(
-                          fontFamily: 'Allura',
-                          fontSize: 40,
-                          color: Colors.pink[50]),
+                          fontSize: 20,
+                          color: Colors.pink[100],
+                          fontWeight: FontWeight.bold),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                tileColor: Colors.pink[900],
-                trailing: Icon(
-                  Icons.add_box,
-                  color: Colors.pink[50],
-                  size: 40,
-                ),
-                title: Text(
-                  "Health Tips",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink[50],
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HealthTips()));
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                tileColor: Colors.pink[900],
-                trailing: Icon(
-                  Icons.plumbing,
-                  color: Colors.pink[50],
-                  size: 40,
-                ),
-                title: Text(
-                  "Medicine",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink[50],
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                tileColor: Colors.pink[900],
-                trailing: Icon(
-                  Icons.chat_bubble_rounded,
-                  color: Colors.pink[50],
-                  size: 40,
-                ),
-                title: Text(
-                  "Ask For Help",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink[50],
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                tileColor: Colors.pink[900],
-                trailing: Icon(
-                  Icons.email,
-                  color: Colors.pink[50],
-                  size: 40,
-                ),
-                title: Text(
-                  "Feedback",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink[50],
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              // SizedBox(
-              //   height: 190,
-              // ),
-              Expanded(
-                  child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ListTile(
-                  leading: Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                    size: 40,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HealthTips()));
+                    },
                   ),
-                  title: Text(
-                    "Back",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    tileColor: Colors.pink[900],
+                    trailing: Icon(
+                      Icons.plumbing,
+                      color: Colors.pink[100],
+                      size: 40,
                     ),
-                    textAlign: TextAlign.right,
+                    title: Text(
+                      "Medicine",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.pink[100],
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ))
-            ],
-          ),
-        )
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    tileColor: Colors.pink[900],
+                    trailing: Icon(
+                      Icons.chat_bubble_rounded,
+                      color: Colors.pink[100],
+                      size: 40,
+                    ),
+                    title: Text(
+                      "Ask For Help",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.pink[100],
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    tileColor: Colors.pink[900],
+                    trailing: Icon(
+                      Icons.email,
+                      color: Colors.pink[100],
+                      size: 40,
+                    ),
+                    title: Text(
+                      "Feedback",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.pink[100],
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FeedbackForm()),
+                      );
+                    },
+                  ),
+                  // SizedBox(
+                  //   height: 190,
+                  // ),
+                  Expanded(
+                      child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                      title: Text(
+                        "Back",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.right,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ))
+                ],
+              ),
+            ))
         // This trailing comma makes auto-formatting nicer for build methods.
         );
   }

@@ -6,50 +6,40 @@ import 'package:my_cycles/aboutus.dart';
 import 'package:my_cycles/community.dart';
 import 'package:my_cycles/main.dart';
 
-
 const magenta = const Color(0x8e3a59);
-void main()async {
+void main() async {
   runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyCycles()
-      
-    ),
+    MaterialApp(debugShowCheckedModeBanner: false, home: MyCycles()),
   );
 }
 
 class Community extends StatefulWidget {
-  
-
   @override
   _CommunityState createState() => _CommunityState();
 }
 
 class _CommunityState extends State<Community> {
-   int _currentIndex=1;
-   int _pageIndex=1; 
-  final List<Widget> _children= [
-    MyCycles(),
+  int _currentIndex = 0;
+  int _pageIndex = 0;
+  final List<Widget> _children = [
     Community(),
+    MyCycles(),
     AboutUs(),
-    
-  ];    
-  
+  ];
+
   // ignore: non_constant_identifier_names
-  _OnTap(){
-    Navigator.of(context)
-    .push(MaterialPageRoute(builder: (BuildContext context)=>_children[_currentIndex]));
-  }  
+  _OnTap() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => _children[_currentIndex]));
+  }
 
   @override
   void initState() {
     super.initState();
-   
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           actions: [
@@ -71,7 +61,7 @@ class _CommunityState extends State<Community> {
         body: SingleChildScrollView(
           child: new Container(
             height: MediaQuery.of(context).size.height,
-             width: MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment(-1.0, 0.0),
@@ -127,9 +117,14 @@ class _CommunityState extends State<Community> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Divider(),
-                Text("Get In touch With Most Recommended Gynecologists",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.pink[900], fontSize: 25, fontWeight: FontWeight.bold),), 
+                Text(
+                  "Get In touch With Most Recommended Gynecologists",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.pink[900],
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
                 Divider(),
                 Material(
                   child: ListTile(
@@ -137,24 +132,25 @@ class _CommunityState extends State<Community> {
                       backgroundImage: AssetImage('assets/user1.jpg'),
                       radius: 30,
                       child: GestureDetector(onTap: () {}),
-                      ),
-                    
-                      tileColor: Colors.pink[900].withOpacity(0.6),
-                      leading: Icon(
+                    ),
+                    tileColor: Colors.pink[900].withOpacity(0.6),
+                    leading: Icon(
                       Icons.enhanced_encryption_sharp,
                       color: Colors.pink[50],
                       size: 40,
                     ),
-                    
-                      title: (
-                        Text("Doctor 1:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),)
-                      ),
-                      subtitle: (
-                        Text("Country: India \nPhone Number: 999999999 \nGender: Female \nemail: xyz@gmail.com",
-                        style: TextStyle(color: Colors.pink[100], fontSize: 15),)
-                      ),
-                      
-                    ),
+                    title: (Text(
+                      "Doctor 1:",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                    subtitle: (Text(
+                      "Country: India \nPhone Number: 999999999 \nGender: Female \nemail: xyz@gmail.com",
+                      style: TextStyle(color: Colors.pink[100], fontSize: 15),
+                    )),
+                  ),
                 ),
                 Divider(),
                 Divider(),
@@ -164,24 +160,25 @@ class _CommunityState extends State<Community> {
                       backgroundImage: AssetImage('assets/user2.jpg'),
                       radius: 30,
                       child: GestureDetector(onTap: () {}),
-                      ),
-                    
-                      tileColor: Colors.pink[900].withOpacity(0.6),
-                      leading: Icon(
+                    ),
+                    tileColor: Colors.pink[900].withOpacity(0.6),
+                    leading: Icon(
                       Icons.enhanced_encryption_sharp,
                       color: Colors.pink[50],
                       size: 40,
                     ),
-                    
-                      title: (
-                        Text("Doctor 2:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),)
-                      ),
-                      subtitle: (
-                        Text("Country: India \nPhone Number: 9988888999 \nGender: Male \nemail: abc@gmail.com",
-                        style: TextStyle(color: Colors.pink[100], fontSize: 15),)
-                      ),
-                      
-                    ),
+                    title: (Text(
+                      "Doctor 2:",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                    subtitle: (Text(
+                      "Country: India \nPhone Number: 9988888999 \nGender: Male \nemail: abc@gmail.com",
+                      style: TextStyle(color: Colors.pink[100], fontSize: 15),
+                    )),
+                  ),
                 ),
                 Divider(),
                 Divider(),
@@ -191,24 +188,25 @@ class _CommunityState extends State<Community> {
                       backgroundImage: AssetImage('assets/user1.jpg'),
                       radius: 30,
                       child: GestureDetector(onTap: () {}),
-                      ),
-                    
-                      tileColor: Colors.pink[900].withOpacity(0.6),
-                      leading: Icon(
+                    ),
+                    tileColor: Colors.pink[900].withOpacity(0.6),
+                    leading: Icon(
                       Icons.enhanced_encryption_sharp,
                       color: Colors.pink[50],
                       size: 40,
                     ),
-                    
-                      title: (
-                        Text("Doctor 3:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),)
-                      ),
-                      subtitle: (
-                        Text("Country: India \nPhone Number: 999999999 \nGender: Female \nemail: xyz@gmail.com",
-                        style: TextStyle(color: Colors.pink[100], fontSize: 15),)
-                      ),
-                      
-                    ),
+                    title: (Text(
+                      "Doctor 3:",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                    subtitle: (Text(
+                      "Country: India \nPhone Number: 999999999 \nGender: Female \nemail: xyz@gmail.com",
+                      style: TextStyle(color: Colors.pink[100], fontSize: 15),
+                    )),
+                  ),
                 ),
                 Divider(),
                 Divider(),
@@ -218,45 +216,42 @@ class _CommunityState extends State<Community> {
                       backgroundImage: AssetImage('assets/user2.jpg'),
                       radius: 30,
                       child: GestureDetector(onTap: () {}),
-                      ),
-                    
-                      tileColor: Colors.pink[900].withOpacity(0.6),
-                      leading: Icon(
+                    ),
+                    tileColor: Colors.pink[900].withOpacity(0.6),
+                    leading: Icon(
                       Icons.enhanced_encryption_sharp,
                       color: Colors.pink[50],
                       size: 40,
                     ),
-                    
-                      title: (
-                        Text("Doctor 4:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),)
-                      ),
-                      subtitle: (
-                        Text("Country: India \nPhone Number: 9988888999 \nGender: Male \nemail: abc@gmail.com",
-                        style: TextStyle(color: Colors.pink[100], fontSize: 15),)
-                      ),
-                      
-                    ),
+                    title: (Text(
+                      "Doctor 4:",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+                    subtitle: (Text(
+                      "Country: India \nPhone Number: 9988888999 \nGender: Male \nemail: abc@gmail.com",
+                      style: TextStyle(color: Colors.pink[100], fontSize: 15),
+                    )),
+                  ),
                 )
               ],
-              
-              
-                    
-                  
+            ),
           ),
         ),
-        ),
         bottomNavigationBar: BottomNavigationBar(
-          
             backgroundColor: Colors.pink[50],
             selectedItemColor: Colors.pink[900],
             unselectedItemColor: Colors.black,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
+                  icon: Icon(Icons.escalator_warning),
+                  title: Text("Community")),
+              BottomNavigationBarItem(
                   icon: Icon(Icons.home), title: Text("Home")),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.phone), title: Text("Contact")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), title: Text("About Us")),
+                  icon: Icon(Icons.people), title: Text("About Us")),
             ],
             type: BottomNavigationBarType.shifting,
             currentIndex: _pageIndex,
@@ -408,12 +403,7 @@ class _CommunityState extends State<Community> {
         )
         // This trailing comma makes auto-formatting nicer for build methods.
         );
-      
-      // This trailing comma makes auto-formatting nicer for build methods.
-    
+
+    // This trailing comma makes auto-formatting nicer for build methods.
   }
-   
-
-  }
-
-
+}

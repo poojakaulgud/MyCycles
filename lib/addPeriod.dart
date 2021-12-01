@@ -14,8 +14,6 @@ class AddPeriod extends StatefulWidget {
   _AddPeriodState createState() => _AddPeriodState();
 }
 
-var snackbar;
-
 class _AddPeriodState extends State<AddPeriod> {
   @override
   Widget build(BuildContext context) {
@@ -93,20 +91,9 @@ class _AddPeriodState extends State<AddPeriod> {
                 ),
               ),
               child: Container(
-                  // margin: EdgeInsets.all(15),
                   child: Form(
-                // key: _key,
-                // autovalidate: _validate,
-                // child: addPeriodFormUI(context),
                 child: FormUI(),
-              ))
-              // child: new Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     Text('Add Period Page'),
-              //   ],
-              // ),
-              )),
+              )))),
     );
   }
 }
