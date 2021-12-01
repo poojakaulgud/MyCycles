@@ -3,9 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_cycles/aboutus.dart';
 import 'package:table_calendar/table_calendar.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-// var fsi = FirebaseFirestore.instance;
+FirebaseFirestore fsi = FirebaseFirestore.instance;
 
 
 const magenta = const Color(0x8e3a59);
@@ -32,6 +33,22 @@ class _MyCycleState extends State<MyCycles> {
     MyCycles(),
     AboutUs()
   ];
+  bool _initialized = false;
+  bool _error = false;
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      // Set `_error` state to true if Firebase initialization fails
+      setState(() {
+        _error = true;
+      });
+    }
+  }
 
   _OnTap() {
     Navigator.of(context).push(MaterialPageRoute(
@@ -42,6 +59,7 @@ class _MyCycleState extends State<MyCycles> {
   void initState() {
     super.initState();
     _controller = CalendarController();
+    initializeFlutterFire();
   }
 
   @override
@@ -220,7 +238,8 @@ class _MyCycleState extends State<MyCycles> {
                                               Colors.pink[900]),
                                     ),
                                     onPressed: () {
-                                      _displayTextInputDialog(context, "Temperature");
+                                      _displayTextInputDialog(context,
+                                          "Temperature", "temperature");
                                     },
                                     child: Text(
                                       "TEMPERATURE",
@@ -245,7 +264,8 @@ class _MyCycleState extends State<MyCycles> {
                                               Colors.pink[900]),
                                     ),
                                     onPressed: () {
-                                      _displayTextInputDialog(context, "Mood");
+                                      _displayTextInputDialog(
+                                          context, "Mood", "mood");
                                     },
                                     child: Text(
                                       "MOOD",
@@ -271,7 +291,7 @@ class _MyCycleState extends State<MyCycles> {
                                     ),
                                     onPressed: () {
                                       _displayTextInputDialog(
-                                          context, "Weight");
+                                          context, "Weight", "weight");
                                     },
                                     child: Text(
                                       "WEIGHT",
@@ -454,7 +474,8 @@ class _MyCycleState extends State<MyCycles> {
 
   String codeDialog;
   String valueText;
-  _displayTextInputDialog(BuildContext context, String heading) async {
+  _displayTextInputDialog(
+      BuildContext context, String heading, String collection_name) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -493,6 +514,13 @@ class _MyCycleState extends State<MyCycles> {
                 ),
                 child: Text('SUBMIT', style: TextStyle(color: Colors.pink[50])),
                 onPressed: () {
+                  DateTime now = new DateTime.now();
+                  fsi.collection(collection_name).add({
+                    "Value": valueText,
+                    "Date": now,
+                  }).then((value) {
+                    print(value.id);
+                  }).catchError((error) => print("Failed to add user: $error"));
                   setState(() {
                     codeDialog = valueText;
                     Navigator.pop(context);
