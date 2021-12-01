@@ -18,16 +18,16 @@ void main()async {
   );
 }
 
-class AboutUs extends StatefulWidget {
+class Community extends StatefulWidget {
   
 
   @override
-  _AboutUsState createState() => _AboutUsState();
+  _CommunityState createState() => _CommunityState();
 }
 
-class _AboutUsState extends State<AboutUs> {
-   int _currentIndex=2;
-   int _pageIndex=2; 
+class _CommunityState extends State<Community> {
+   int _currentIndex=1;
+   int _pageIndex=1; 
   final List<Widget> _children= [
     MyCycles(),
     Community(),
@@ -51,7 +51,7 @@ class _AboutUsState extends State<AboutUs> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
           actions: [
             new SizedBox(
               height: 100.0,
@@ -61,7 +61,7 @@ class _AboutUsState extends State<AboutUs> {
             ),
           ],
           title: Text(
-            "About Us",
+            "Community",
             style: TextStyle(fontFamily: 'Allura', fontSize: 30),
           ),
           backgroundColor: Colors.pink[900],
@@ -69,9 +69,10 @@ class _AboutUsState extends State<AboutUs> {
           elevation: 5.0,
         ),
         body: SingleChildScrollView(
-        child: new Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
+          child: new Container(
+            height: MediaQuery.of(context).size.height,
+             width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment(-1.0, 0.0),
                 end: Alignment(1.0, 0.0),
@@ -119,7 +120,6 @@ class _AboutUsState extends State<AboutUs> {
                   Colors.pink[50],
                   Colors.pink[50],
                 ],
-                
                 tileMode: TileMode.repeated,
               ),
             ),
@@ -127,47 +127,124 @@ class _AboutUsState extends State<AboutUs> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Divider(),
-                ContactUs(
-                  companyName: "Aditi Kulkarni",
-                   textColor: Colors.white,
-                    cardColor: Colors.pink[900],
-                    companyFontSize: 30,
-                     companyColor: Colors.pink,
-                      taglineColor: Colors.pink,
-                       email: "aditi.hk@somaiya.edu",
-                       phoneNumber: '+91- 9820623217',
-                       taglineFontWeight: FontWeight.normal,
-                       logo: AssetImage('assets/aditi.jpeg'),
-                       tagLine: " Student, KJSCE TY IT ",
-                       dividerColor: Colors.black38,
-                       
-                       
-                       ),
-                       Divider(),
-                       ContactUs(
-                  companyName: "Pooja Kaulgud",
-                   companyFontSize: 30,
-                   textColor: Colors.white,
-                    cardColor: Colors.pink[900],
-                     companyColor: Colors.pink,
-                      taglineColor: Colors.pink,
-                       email: "pooja.kaulgud@somaiya.edu",
-                       phoneNumber: '+91- 9619105432',
-                       logo: AssetImage('assets/pooja.jpeg'),
-                       taglineFontWeight: FontWeight.normal,
-                       tagLine: " Student, KJSCE TY IT ",
-                       dividerColor: Colors.black38,
-                       
-                       )
-                       
-                       
-              ]
+                Text("Get In touch With Most Recommended Gynecologists",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.pink[900], fontSize: 25, fontWeight: FontWeight.bold),), 
+                Divider(),
+                Material(
+                  child: ListTile(
+                    trailing: CircleAvatar(
+                      backgroundImage: AssetImage('assets/user1.jpg'),
+                      radius: 30,
+                      child: GestureDetector(onTap: () {}),
+                      ),
+                    
+                      tileColor: Colors.pink[900].withOpacity(0.6),
+                      leading: Icon(
+                      Icons.enhanced_encryption_sharp,
+                      color: Colors.pink[50],
+                      size: 40,
+                    ),
+                    
+                      title: (
+                        Text("Doctor 1:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),)
+                      ),
+                      subtitle: (
+                        Text("Country: India \nPhone Number: 999999999 \nGender: Female \nemail: xyz@gmail.com",
+                        style: TextStyle(color: Colors.pink[100], fontSize: 15),)
+                      ),
+                      
+                    ),
+                ),
+                Divider(),
+                Divider(),
+                Material(
+                  child: ListTile(
+                    trailing: CircleAvatar(
+                      backgroundImage: AssetImage('assets/user2.jpg'),
+                      radius: 30,
+                      child: GestureDetector(onTap: () {}),
+                      ),
+                    
+                      tileColor: Colors.pink[900].withOpacity(0.6),
+                      leading: Icon(
+                      Icons.enhanced_encryption_sharp,
+                      color: Colors.pink[50],
+                      size: 40,
+                    ),
+                    
+                      title: (
+                        Text("Doctor 2:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),)
+                      ),
+                      subtitle: (
+                        Text("Country: India \nPhone Number: 9988888999 \nGender: Male \nemail: abc@gmail.com",
+                        style: TextStyle(color: Colors.pink[100], fontSize: 15),)
+                      ),
+                      
+                    ),
+                ),
+                Divider(),
+                Divider(),
+                Material(
+                  child: ListTile(
+                    trailing: CircleAvatar(
+                      backgroundImage: AssetImage('assets/user1.jpg'),
+                      radius: 30,
+                      child: GestureDetector(onTap: () {}),
+                      ),
+                    
+                      tileColor: Colors.pink[900].withOpacity(0.6),
+                      leading: Icon(
+                      Icons.enhanced_encryption_sharp,
+                      color: Colors.pink[50],
+                      size: 40,
+                    ),
+                    
+                      title: (
+                        Text("Doctor 3:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),)
+                      ),
+                      subtitle: (
+                        Text("Country: India \nPhone Number: 999999999 \nGender: Female \nemail: xyz@gmail.com",
+                        style: TextStyle(color: Colors.pink[100], fontSize: 15),)
+                      ),
+                      
+                    ),
+                ),
+                Divider(),
+                Divider(),
+                Material(
+                  child: ListTile(
+                    trailing: CircleAvatar(
+                      backgroundImage: AssetImage('assets/user2.jpg'),
+                      radius: 30,
+                      child: GestureDetector(onTap: () {}),
+                      ),
+                    
+                      tileColor: Colors.pink[900].withOpacity(0.6),
+                      leading: Icon(
+                      Icons.enhanced_encryption_sharp,
+                      color: Colors.pink[50],
+                      size: 40,
+                    ),
+                    
+                      title: (
+                        Text("Doctor 4:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),)
+                      ),
+                      subtitle: (
+                        Text("Country: India \nPhone Number: 9988888999 \nGender: Male \nemail: abc@gmail.com",
+                        style: TextStyle(color: Colors.pink[100], fontSize: 15),)
+                      ),
+                      
+                    ),
+                )
+              ],
               
-
-            ),
-
-
-        ),),
+              
+                    
+                  
+          ),
+        ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
           
             backgroundColor: Colors.pink[50],
@@ -329,7 +406,8 @@ class _AboutUsState extends State<AboutUs> {
             ],
           ),
         )
-    );
+        // This trailing comma makes auto-formatting nicer for build methods.
+        );
       
       // This trailing comma makes auto-formatting nicer for build methods.
     
