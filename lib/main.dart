@@ -2,17 +2,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_cycles/aboutus.dart';
+import 'package:my_cycles/addPeriod.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 FirebaseFirestore fsi = FirebaseFirestore.instance;
 
-
 const magenta = const Color(0x8e3a59);
 int _currentIndex = 0;
 int _pageIndex = 0;
-void main() {
+void main() async {
+  // await Firebase.initializeApp();
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -29,10 +30,7 @@ class _MyCycleState extends State<MyCycles> {
   CalendarController _controller;
   TextEditingController _textFieldController = TextEditingController();
   int _selectedIndex = 0;
-  final List<Widget> _children = [
-    MyCycles(),
-    AboutUs()
-  ];
+  final List<Widget> _children = [MyCycles(), AboutUs()];
   bool _initialized = false;
   bool _error = false;
   void initializeFlutterFire() async {
@@ -84,6 +82,7 @@ class _MyCycleState extends State<MyCycles> {
         ),
         body: SingleChildScrollView(
           child: new Container(
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -216,7 +215,13 @@ class _MyCycleState extends State<MyCycles> {
                         Divider(),
                         SizedBox(
                           child: FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddPeriod()),
+                              );
+                            },
                             backgroundColor: Colors.pink[900],
                             child: Icon(Icons.add, color: Colors.pink[100]),
                           ),
@@ -308,7 +313,6 @@ class _MyCycleState extends State<MyCycles> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          
             backgroundColor: Colors.pink[50],
             selectedItemColor: Colors.pink[900],
             unselectedItemColor: Colors.black,
@@ -520,7 +524,7 @@ class _MyCycleState extends State<MyCycles> {
                     "Date": now,
                   }).then((value) {
                     print(value.id);
-                  }).catchError((error) => print("Failed to add user: $error"));
+                  }).catchError((error) => print("Failed to add data: $error"));
                   setState(() {
                     codeDialog = valueText;
                     Navigator.pop(context);
