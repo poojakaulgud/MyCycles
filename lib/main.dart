@@ -2,6 +2,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_cycles/aboutus.dart';
+import 'package:my_cycles/community.dart';
+import 'package:my_cycles/healthtips.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +14,8 @@ FirebaseFirestore fsi = FirebaseFirestore.instance;
 const magenta = const Color(0x8e3a59);
 int _currentIndex = 0;
 int _pageIndex = 0;
-void main() {
+void main() async {
+  // await Firebase.initializeApp();
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -28,9 +31,9 @@ class MyCycles extends StatefulWidget {
 class _MyCycleState extends State<MyCycles> {
   CalendarController _controller;
   TextEditingController _textFieldController = TextEditingController();
-  int _selectedIndex = 0;
   final List<Widget> _children = [
     MyCycles(),
+    Community(),
     AboutUs()
   ];
   bool _initialized = false;
@@ -50,6 +53,7 @@ class _MyCycleState extends State<MyCycles> {
     }
   }
 
+  // ignore: non_constant_identifier_names
   _OnTap() {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => _children[_currentIndex]));
@@ -138,10 +142,13 @@ class _MyCycleState extends State<MyCycles> {
             ),
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+            
               children: <Widget>[
                 TableCalendar(
                   initialCalendarFormat: CalendarFormat.month,
+                  weekendDays: [],
                   calendarStyle: CalendarStyle(
+                    
                       weekendStyle: TextStyle(
                           color: Colors.pink[900], fontWeight: FontWeight.bold),
                       outsideStyle: TextStyle(color: Colors.pink[900]),
@@ -242,7 +249,7 @@ class _MyCycleState extends State<MyCycles> {
                                           "Temperature", "temperature");
                                     },
                                     child: Text(
-                                      "TEMPERATURE",
+                                      "BODY TEMPERATURE",
                                       style: TextStyle(
                                           color: Colors.pink[200],
                                           fontWeight: FontWeight.bold),
@@ -373,7 +380,10 @@ class _MyCycleState extends State<MyCycles> {
                       fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HealthTips()));
                 },
               ),
               SizedBox(
