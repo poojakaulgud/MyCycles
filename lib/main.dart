@@ -5,6 +5,7 @@ import 'package:my_cycles/aboutus.dart';
 import 'package:my_cycles/addPeriod.dart';
 import 'package:my_cycles/community.dart';
 import 'package:my_cycles/healthtips.dart';
+import 'package:my_cycles/logs.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -402,7 +403,8 @@ class _MyCycleState extends State<MyCycles> {
                       fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  _displayTextInputDialog(
+                                          context, "Medicine", "medicine");
                 },
               ),
               SizedBox(
@@ -416,14 +418,15 @@ class _MyCycleState extends State<MyCycles> {
                   size: 40,
                 ),
                 title: Text(
-                  "Ask For Help",
+                  "My Logs",
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.pink[50],
                       fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Logs()));
                 },
               ),
               SizedBox(
