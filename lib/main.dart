@@ -3,13 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_cycles/aboutus.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 // var fsi = FirebaseFirestore.instance;
 
+
+const magenta = const Color(0x8e3a59);
 int _currentIndex = 0;
 int _pageIndex = 0;
-const magenta = const Color(0x8e3a59);
 void main() {
   runApp(
     MaterialApp(
@@ -219,8 +220,7 @@ class _MyCycleState extends State<MyCycles> {
                                               Colors.pink[900]),
                                     ),
                                     onPressed: () {
-                                      _displayTextInputDialog(
-                                          context, "Temperature");
+                                      _displayTextInputDialog(context, "Temperature");
                                     },
                                     child: Text(
                                       "TEMPERATURE",
@@ -288,6 +288,7 @@ class _MyCycleState extends State<MyCycles> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          
             backgroundColor: Colors.pink[50],
             selectedItemColor: Colors.pink[900],
             unselectedItemColor: Colors.black,
