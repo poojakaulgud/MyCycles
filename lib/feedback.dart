@@ -199,7 +199,7 @@ class _FormUIState extends State<FormUI> {
                     } else {
                       print('Invalid request.');
                     }
-                    temp = '';
+                    temp = ' ';
                     Navigator.pop(context);
                   });
                 },
