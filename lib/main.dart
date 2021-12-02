@@ -7,6 +7,7 @@ import 'package:my_cycles/feedback.dart';
 import 'package:my_cycles/community.dart';
 import 'package:my_cycles/healthtips.dart';
 import 'package:my_cycles/logs.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,6 +33,7 @@ class MyCycles extends StatefulWidget {
 
 class _MyCycleState extends State<MyCycles> {
   CalendarController _controller;
+  DateFormat formatter = DateFormat('yyyy-MM-dd');
   TextEditingController _textFieldController = TextEditingController();
   final List<Widget> _children = [Community(), MyCycles(), AboutUs()];
   bool _initialized = false;
@@ -538,9 +540,10 @@ class _MyCycleState extends State<MyCycles> {
                 child: Text('SUBMIT', style: TextStyle(color: Colors.pink[50])),
                 onPressed: () {
                   DateTime now = new DateTime.now();
+                  String dateValue = formatter.format(now);
                   fsi.collection(collection_name).add({
                     "Value": valueText,
-                    "Date": now,
+                    "Date": dateValue,
                   }).then((value) {
                     print(value.id);
                   }).catchError((error) => print("Failed to add data: $error"));
