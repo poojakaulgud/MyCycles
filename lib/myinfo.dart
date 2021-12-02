@@ -171,7 +171,7 @@ class _ListUIState extends State<ListUI> {
                     color: Colors.pink[900],
                     fontWeight: FontWeight.w600,
                     fontSize: 30)),
-            subtitle: new Text(' Record: ' + valueArray[i] + ' ',
+            subtitle: new Text(' Record: ' + valueArray[i] + '  ',
                 style: TextStyle(
                     color: Colors.pink[100],
                     backgroundColor: Colors.pink[900],
