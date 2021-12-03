@@ -20,7 +20,7 @@ class HealthTipCard  extends StatelessWidget {
           Padding(padding: const EdgeInsets.all(16.0),
           child: Text(
             healthTip.tip + "\n" + "-" + healthTip.author,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15, fontFamily: 'Poppins'),
         
 
           ),),
@@ -34,7 +34,7 @@ class HealthTipCard  extends StatelessWidget {
                   colorClickableText: Colors.white,
                   trimCollapsedText: '...SHOW MORE',
                   trimExpandedText: ' SHOW LESS',
-                  style: TextStyle(color: Colors.pink[100]),
+                  style: TextStyle(color: Colors.pink[100], fontFamily: 'Poppins'),
                 ),
               ),
               

@@ -112,7 +112,7 @@ class MyInfo extends StatelessWidget {
                     color: Colors.pink[900],
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
-                    fontSize: 25),
+                    fontSize: 25, fontFamily: 'Poppins'),
                 textAlign: TextAlign.center,
               ),
               Divider(),
@@ -135,7 +135,7 @@ class MyInfo extends StatelessWidget {
                     });
                   },
                   child: Text('Get Data',
-                      style: TextStyle(color: Colors.pink[50], fontSize: 30))),
+                      style: TextStyle(color: Colors.pink[50], fontSize: 30, fontFamily: 'Poppins'))),
               Divider(
                 thickness: 3,
                 color: Colors.pink[900],
@@ -170,13 +170,13 @@ class _ListUIState extends State<ListUI> {
                 style: TextStyle(
                     color: Colors.pink[900],
                     fontWeight: FontWeight.w600,
-                    fontSize: 30)),
+                    fontSize: 25, fontFamily: 'Poppins')),
             subtitle: new Text(' Record: ' + valueArray[i] + ' ',
                 style: TextStyle(
                     color: Colors.pink[100],
                     backgroundColor: Colors.pink[900],
                     fontWeight: FontWeight.w600,
-                    fontSize: 35)),
+                    fontSize: 30, fontFamily: 'Poppins')),
           ),
         Divider(
           thickness: 2,

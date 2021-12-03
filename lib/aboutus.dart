@@ -1,10 +1,19 @@
 // @dart=2.9
-import 'package:contactus/contactus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_cycles/aboutus.dart';
+import 'package:my_cycles/addPeriod.dart';
+import 'package:my_cycles/feedback.dart';
 import 'package:my_cycles/community.dart';
-import 'package:my_cycles/main.dart';
+import 'package:my_cycles/healthtips.dart';
+import 'package:my_cycles/logs.dart';
+import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'main.dart';
+import 'package:contactus/contactus.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const magenta = const Color(0x8e3a59);
 void main() async {
@@ -21,6 +30,9 @@ class AboutUs extends StatefulWidget {
 class _AboutUsState extends State<AboutUs> {
   int _currentIndex = 2;
   int _pageIndex = 2;
+  CalendarController _controller;
+  DateFormat formatter = DateFormat('yyyy-MM-dd');
+  TextEditingController _textFieldController = TextEditingController();
   final List<Widget> _children = [
     Community(),
     MyCycles(),
@@ -52,7 +64,7 @@ class _AboutUsState extends State<AboutUs> {
           ],
           title: Text(
             "About Us",
-            style: TextStyle(fontFamily: 'Allura', fontSize: 30),
+            style: TextStyle(fontFamily: 'Allura', fontSize: 30, ),
           ),
           backgroundColor: Colors.pink[900],
           centerTitle: true,
@@ -117,12 +129,15 @@ class _AboutUsState extends State<AboutUs> {
                 children: [
                   Divider(),
                   ContactUs(
+                    
                     companyName: "Aditi Kulkarni",
                     textColor: Colors.white,
+                    textFont: 'Poppins',
                     cardColor: Colors.pink[900],
                     companyFontSize: 30,
                     companyColor: Colors.pink,
                     taglineColor: Colors.pink,
+                    taglineFont: 'Poppins',
                     email: "aditi.hk@somaiya.edu",
                     phoneNumber: '+91- 9820623217',
                     taglineFontWeight: FontWeight.normal,
@@ -132,6 +147,8 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                   Divider(),
                   ContactUs(
+                    textFont: 'Poppins',
+                     taglineFont: 'Poppins',
                     companyName: "Pooja Kaulgud",
                     companyFontSize: 30,
                     textColor: Colors.white,
@@ -170,146 +187,219 @@ class _AboutUsState extends State<AboutUs> {
               _OnTap();
             },
             elevation: 5),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              DrawerHeader(
-                padding: const EdgeInsets.fromLTRB(0, 2, 20, 2),
-                decoration: BoxDecoration(
-                  color: Colors.pink[900],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        iconSize: 100,
-                        padding: EdgeInsets.fromLTRB(0.1, 2, 2, 2),
-                        icon: Image.asset('assets/logo.png'),
-                        onPressed: () => {}),
-                    Text(
-                      "My Cycles",
+        drawer: Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: Colors
+                  .pink[100], //This will change the drawer background to blue.
+              //other styles
+            ),
+            child: Drawer(
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                    padding: const EdgeInsets.fromLTRB(0, 2, 20, 2),
+                    decoration: BoxDecoration(
+                      color: Colors.pink[900],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                            iconSize: 100,
+                            padding: EdgeInsets.fromLTRB(0.1, 2, 2, 2),
+                            icon: Image.asset('assets/logo.png'),
+                            onPressed: () => {}),
+                        Text(
+                          "My Cycles",
+                          style: TextStyle(
+                              fontFamily: 'Allura',
+                              fontSize: 40,
+                              color: Colors.pink[50]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    tileColor: Colors.pink[900],
+                    trailing: Icon(
+                      Icons.add_box,
+                      color: Colors.pink[100],
+                      size: 40,
+                    ),
+                    title: Text(
+                      "Health Tips",
                       style: TextStyle(
-                          fontFamily: 'Allura',
-                          fontSize: 40,
-                          color: Colors.pink[50]),
+                          fontSize: 20,
+                          color: Colors.pink[100],
+                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                tileColor: Colors.pink[900],
-                trailing: Icon(
-                  Icons.add_box,
-                  color: Colors.pink[50],
-                  size: 40,
-                ),
-                title: Text(
-                  "Health Tips",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink[50],
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                tileColor: Colors.pink[900],
-                trailing: Icon(
-                  Icons.plumbing,
-                  color: Colors.pink[50],
-                  size: 40,
-                ),
-                title: Text(
-                  "Medicine",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink[50],
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                tileColor: Colors.pink[900],
-                trailing: Icon(
-                  Icons.chat_bubble_rounded,
-                  color: Colors.pink[50],
-                  size: 40,
-                ),
-                title: Text(
-                  "Ask For Help",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink[50],
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                tileColor: Colors.pink[900],
-                trailing: Icon(
-                  Icons.email,
-                  color: Colors.pink[50],
-                  size: 40,
-                ),
-                title: Text(
-                  "Feedback",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink[50],
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              // SizedBox(
-              //   height: 190,
-              // ),
-              Expanded(
-                  child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ListTile(
-                  leading: Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                    size: 40,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HealthTips()));
+                    },
                   ),
-                  title: Text(
-                    "Back",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    tileColor: Colors.pink[900],
+                    trailing: Icon(
+                      Icons.plumbing,
+                      color: Colors.pink[100],
+                      size: 40,
                     ),
-                    textAlign: TextAlign.right,
+                    title: Text(
+                      "Medicine",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.pink[100],
+                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                    ),
+                    onTap: () {
+                      _displayTextInputDialog(context, "Medicine", "medicine");
+                    },
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ))
-            ],
-          ),
-        ));
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    tileColor: Colors.pink[900],
+                    trailing: Icon(
+                      Icons.chat_bubble_rounded,
+                      color: Colors.pink[100],
+                      size: 40,
+                    ),
+                    title: Text(
+                      "My Logs",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.pink[100],
+                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                    ),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Logs()));
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    tileColor: Colors.pink[900],
+                    trailing: Icon(
+                      Icons.email,
+                      color: Colors.pink[100],
+                      size: 40,
+                    ),
+                    title: Text(
+                      "Feedback",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.pink[100],
+                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FeedbackForm()),
+                      );
+                    },
+                  ),
+                  // SizedBox(
+                  //   height: 190,
+                  // ),
+                  Expanded(
+                      child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                      title: Text(
+                        "Back",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold, fontFamily: 'Poppins',
+                        ),
+                        textAlign: TextAlign.right,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ))
+                ],
+              ),
+            )));
 
     // This trailing comma makes auto-formatting nicer for build methods.
   }
+  String codeDialog;
+  String valueText;
+  _displayTextInputDialog(
+      BuildContext context, String heading, String collection_name) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(heading),
+            backgroundColor: Colors.pink[50],
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "Enter your " + heading),
+            ),
+            actions: <Widget>[
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.pink[900]),
+                ),
+                child: Text(
+                  'CANCEL',
+                  style: TextStyle(color: Colors.pink[50], fontFamily: 'Poppins'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.pink[900]),
+                ),
+                child: Text('SUBMIT', style: TextStyle(color: Colors.pink[50], fontFamily: 'Poppins')),
+                onPressed: () {
+                  DateTime now = new DateTime.now();
+                  String dateValue = formatter.format(now);
+                  fsi.collection(collection_name).add({
+                    "Value": valueText,
+                    "Date": dateValue,
+                  }).then((value) {
+                    print(value.id);
+                  }).catchError((error) => print("Failed to add data: $error"));
+                  setState(() {
+                    codeDialog = valueText;
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+          );
+        });
+      }
 }

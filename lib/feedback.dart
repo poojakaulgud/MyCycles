@@ -128,7 +128,7 @@ class _FormUIState extends State<FormUI> {
         content: Text('Thankyou for your Feedback!',
             textAlign: TextAlign.center,
             style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[50])),
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[50], fontFamily: 'Poppins')),
         backgroundColor: Colors.pink[200],
       );
 
@@ -140,7 +140,7 @@ class _FormUIState extends State<FormUI> {
         content: Text('Error in submitting!',
             textAlign: TextAlign.center,
             style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[50])),
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.pink[50], fontFamily: 'Poppins')),
         backgroundColor: Colors.pink[200],
       );
 
@@ -172,7 +172,7 @@ class _FormUIState extends State<FormUI> {
                 ),
                 child: Text(
                   'CANCEL',
-                  style: TextStyle(color: Colors.pink[50]),
+                  style: TextStyle(color: Colors.pink[50], fontFamily: 'Poppins'),
                 ),
                 onPressed: () {
                   setState(() {
@@ -185,7 +185,7 @@ class _FormUIState extends State<FormUI> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.pink[900]),
                 ),
-                child: Text('OK', style: TextStyle(color: Colors.pink[50])),
+                child: Text('OK', style: TextStyle(color: Colors.pink[50], fontFamily: 'Poppins')),
                 onPressed: () {
                   setState(() {
                     if (heading == 'Name') {
@@ -221,12 +221,12 @@ class _FormUIState extends State<FormUI> {
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[100],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           subtitle: Text(name,
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[50],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           tileColor: Colors.pink[900].withOpacity(0.7),
           trailing: IconButton(
             onPressed: () {
@@ -245,12 +245,12 @@ class _FormUIState extends State<FormUI> {
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[100],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           subtitle: Text(age.toString(),
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[50],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           tileColor: Colors.pink[900].withOpacity(0.7),
           trailing: IconButton(
             onPressed: () {
@@ -269,12 +269,12 @@ class _FormUIState extends State<FormUI> {
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[100],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold,fontFamily: 'Poppins')),
           subtitle: Text(rate.toString(),
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[50],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           tileColor: Colors.pink[900].withOpacity(0.7),
           trailing: SizedBox(
               width: 170,
@@ -305,12 +305,12 @@ class _FormUIState extends State<FormUI> {
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[100],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           subtitle: Text(reason,
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[50],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           tileColor: Colors.pink[900].withOpacity(0.7),
           trailing: IconButton(
             onPressed: () {
@@ -329,12 +329,12 @@ class _FormUIState extends State<FormUI> {
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[100],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           subtitle: Text(comments,
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.pink[50],
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: 'Poppins')),
           tileColor: Colors.pink[900].withOpacity(0.7),
           trailing: IconButton(
             onPressed: () {
@@ -362,7 +362,7 @@ class _FormUIState extends State<FormUI> {
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.pink[100],
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
                 ))),
       ],
     );

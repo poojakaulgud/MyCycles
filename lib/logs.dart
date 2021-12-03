@@ -41,7 +41,7 @@ class _LogsState extends State<Logs> {
         ],
         title: Text(
           "My Logs",
-          style: TextStyle(fontFamily: 'Allura', fontSize: 30),
+          style: TextStyle(fontFamily: 'Allura', fontSize: 30, ),
         ),
         backgroundColor: Colors.pink[900],
         centerTitle: true,
@@ -112,7 +112,7 @@ class _LogsState extends State<Logs> {
                       color: Colors.pink[900],
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 2,
+                      letterSpacing: 2,fontFamily: 'Poppins'
                     ),
                     textAlign: TextAlign.center),
                 Divider(),
@@ -123,7 +123,7 @@ class _LogsState extends State<Logs> {
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              letterSpacing: 3)),
+                              letterSpacing: 3, fontFamily: 'Poppins')),
                       trailing: IconButton(
                         icon: Icon(Icons.navigate_next),
                         onPressed: () => Navigator.push(
@@ -144,7 +144,7 @@ class _LogsState extends State<Logs> {
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            letterSpacing: 3),
+                            letterSpacing: 3, fontFamily: 'Poppins'),
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.navigate_next),
@@ -165,7 +165,7 @@ class _LogsState extends State<Logs> {
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              letterSpacing: 3)),
+                              letterSpacing: 3, fontFamily: 'Poppins')),
                       trailing: IconButton(
                         icon: Icon(Icons.navigate_next),
                         onPressed: () => Navigator.push(
@@ -185,7 +185,7 @@ class _LogsState extends State<Logs> {
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              letterSpacing: 3)),
+                              letterSpacing: 3, fontFamily: 'Poppins')),
                       trailing: IconButton(
                         icon: Icon(Icons.navigate_next),
                         onPressed: () => Navigator.push(
