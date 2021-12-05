@@ -198,22 +198,19 @@ class _MyCycleState extends State<MyCycles> {
                       unavailableStyle: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                       weekendStyle: TextStyle(
-                        color: Colors.pink[900],
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                      ),
+                          color: Colors.pink[900],
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900),
                       outsideStyle: TextStyle(color: Colors.pink[900]),
                       outsideWeekendStyle: TextStyle(color: Colors.pink[900]),
                       weekdayStyle: TextStyle(
-                        color: Colors.pink[900],
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                      ),
+                          color: Colors.pink[900],
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900),
                       todayColor: Colors.pink[900],
                       // selectedColor: Theme.of(context).primaryColor,
                       todayStyle: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins',
                           fontSize: 20.0,
                           color: Colors.white)),
                   headerStyle: HeaderStyle(

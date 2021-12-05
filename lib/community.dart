@@ -133,7 +133,6 @@ class _CommunityState extends State<Community> {
                   style: TextStyle(
                       color: Colors.pink[900],
                       fontSize: 25,
-                      
                       fontWeight: FontWeight.bold),
                 ),
                 Divider(),
@@ -155,11 +154,15 @@ class _CommunityState extends State<Community> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20, fontFamily: 'Poppins'),
+                          fontSize: 20,
+                          fontFamily: 'Poppins'),
                     )),
                     subtitle: (Text(
                       "Country: India \nPhone Number: 999999999 \nGender: Female \nemail: xyz@gmail.com",
-                      style: TextStyle(color: Colors.pink[100], fontSize: 15,fontFamily: 'Poppins'),
+                      style: TextStyle(
+                          color: Colors.pink[100],
+                          fontSize: 15,
+                          fontFamily: 'Poppins'),
                     )),
                   ),
                 ),
@@ -183,11 +186,15 @@ class _CommunityState extends State<Community> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20, fontFamily: 'Poppins'),
+                          fontSize: 20,
+                          fontFamily: 'Poppins'),
                     )),
                     subtitle: (Text(
                       "Country: India \nPhone Number: 9988888999 \nGender: Male \nemail: abc@gmail.com",
-                      style: TextStyle(color: Colors.pink[100], fontSize: 15, fontFamily: 'Poppins'),
+                      style: TextStyle(
+                          color: Colors.pink[100],
+                          fontSize: 15,
+                          fontFamily: 'Poppins'),
                     )),
                   ),
                 ),
@@ -211,11 +218,15 @@ class _CommunityState extends State<Community> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20, fontFamily: 'Poppins'),
+                          fontSize: 20,
+                          fontFamily: 'Poppins'),
                     )),
                     subtitle: (Text(
                       "Country: India \nPhone Number: 999999999 \nGender: Female \nemail: xyz@gmail.com",
-                      style: TextStyle(color: Colors.pink[100], fontSize: 15, fontFamily: 'Poppins'),
+                      style: TextStyle(
+                          color: Colors.pink[100],
+                          fontSize: 15,
+                          fontFamily: 'Poppins'),
                     )),
                   ),
                 ),
@@ -239,11 +250,15 @@ class _CommunityState extends State<Community> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20, fontFamily: 'Poppins'),
+                          fontSize: 20,
+                          fontFamily: 'Poppins'),
                     )),
                     subtitle: (Text(
                       "Country: India \nPhone Number: 9988888999 \nGender: Male \nemail: abc@gmail.com",
-                      style: TextStyle(color: Colors.pink[100], fontSize: 15, fontFamily: 'Poppins'),
+                      style: TextStyle(
+                          color: Colors.pink[100],
+                          fontSize: 15,
+                          fontFamily: 'Poppins'),
                     )),
                   ),
                 )
@@ -298,9 +313,10 @@ class _CommunityState extends State<Community> {
                         Text(
                           "My Cycles",
                           style: TextStyle(
-                              fontFamily: 'Allura',
-                              fontSize: 40,
-                              color: Colors.pink[50], ),
+                            fontFamily: 'Allura',
+                            fontSize: 40,
+                            color: Colors.pink[50],
+                          ),
                         ),
                       ],
                     ),
@@ -320,7 +336,8 @@ class _CommunityState extends State<Community> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -344,10 +361,15 @@ class _CommunityState extends State<Community> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
-                      _displayTextInputDialog(context, "Medicine", "medicine", );
+                      _displayTextInputDialog(
+                        context,
+                        "Medicine",
+                        "medicine",
+                      );
                     },
                   ),
                   SizedBox(
@@ -365,7 +387,8 @@ class _CommunityState extends State<Community> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(context,
@@ -387,7 +410,8 @@ class _CommunityState extends State<Community> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -411,10 +435,10 @@ class _CommunityState extends State<Community> {
                       title: Text(
                         "Back",
                         style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,fontFamily: 'Poppins'
-                        ),
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Poppins'),
                         textAlign: TextAlign.right,
                       ),
                       onTap: () {
@@ -430,6 +454,7 @@ class _CommunityState extends State<Community> {
 
     // This trailing comma makes auto-formatting nicer for build methods.
   }
+
   String codeDialog;
   String valueText;
   _displayTextInputDialog(
@@ -457,7 +482,8 @@ class _CommunityState extends State<Community> {
                 ),
                 child: Text(
                   'CANCEL',
-                  style: TextStyle(color: Colors.pink[50], fontFamily: 'Poppins'),
+                  style:
+                      TextStyle(color: Colors.pink[50], fontFamily: 'Poppins'),
                 ),
                 onPressed: () {
                   setState(() {
@@ -470,11 +496,13 @@ class _CommunityState extends State<Community> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.pink[900]),
                 ),
-                child: Text('SUBMIT', style: TextStyle(color: Colors.pink[50], fontFamily: 'Poppins')),
+                child: Text('SUBMIT',
+                    style: TextStyle(
+                        color: Colors.pink[50], fontFamily: 'Poppins')),
                 onPressed: () {
                   DateTime now = new DateTime.now();
                   String dateValue = formatter.format(now);
-                  fsi.collection(collection_name).add({
+                  FirebaseFirestore.instance.collection(collection_name).add({
                     "Value": valueText,
                     "Date": dateValue,
                   }).then((value) {
@@ -489,5 +517,5 @@ class _CommunityState extends State<Community> {
             ],
           );
         });
-}
+  }
 }

@@ -64,7 +64,10 @@ class _AboutUsState extends State<AboutUs> {
           ],
           title: Text(
             "About Us",
-            style: TextStyle(fontFamily: 'Allura', fontSize: 30, ),
+            style: TextStyle(
+              fontFamily: 'Allura',
+              fontSize: 30,
+            ),
           ),
           backgroundColor: Colors.pink[900],
           centerTitle: true,
@@ -129,7 +132,6 @@ class _AboutUsState extends State<AboutUs> {
                 children: [
                   Divider(),
                   ContactUs(
-                    
                     companyName: "Aditi Kulkarni",
                     textColor: Colors.white,
                     textFont: 'Poppins',
@@ -148,7 +150,7 @@ class _AboutUsState extends State<AboutUs> {
                   Divider(),
                   ContactUs(
                     textFont: 'Poppins',
-                     taglineFont: 'Poppins',
+                    taglineFont: 'Poppins',
                     companyName: "Pooja Kaulgud",
                     companyFontSize: 30,
                     textColor: Colors.white,
@@ -234,7 +236,8 @@ class _AboutUsState extends State<AboutUs> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -258,7 +261,8 @@ class _AboutUsState extends State<AboutUs> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       _displayTextInputDialog(context, "Medicine", "medicine");
@@ -279,7 +283,8 @@ class _AboutUsState extends State<AboutUs> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(context,
@@ -301,7 +306,8 @@ class _AboutUsState extends State<AboutUs> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -327,7 +333,8 @@ class _AboutUsState extends State<AboutUs> {
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
-                          fontWeight: FontWeight.bold, fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
                         ),
                         textAlign: TextAlign.right,
                       ),
@@ -342,6 +349,7 @@ class _AboutUsState extends State<AboutUs> {
 
     // This trailing comma makes auto-formatting nicer for build methods.
   }
+
   String codeDialog;
   String valueText;
   _displayTextInputDialog(
@@ -369,7 +377,8 @@ class _AboutUsState extends State<AboutUs> {
                 ),
                 child: Text(
                   'CANCEL',
-                  style: TextStyle(color: Colors.pink[50], fontFamily: 'Poppins'),
+                  style:
+                      TextStyle(color: Colors.pink[50], fontFamily: 'Poppins'),
                 ),
                 onPressed: () {
                   setState(() {
@@ -382,11 +391,13 @@ class _AboutUsState extends State<AboutUs> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.pink[900]),
                 ),
-                child: Text('SUBMIT', style: TextStyle(color: Colors.pink[50], fontFamily: 'Poppins')),
+                child: Text('SUBMIT',
+                    style: TextStyle(
+                        color: Colors.pink[50], fontFamily: 'Poppins')),
                 onPressed: () {
                   DateTime now = new DateTime.now();
                   String dateValue = formatter.format(now);
-                  fsi.collection(collection_name).add({
+                  FirebaseFirestore.instance.collection(collection_name).add({
                     "Value": valueText,
                     "Date": dateValue,
                   }).then((value) {
@@ -401,5 +412,5 @@ class _AboutUsState extends State<AboutUs> {
             ],
           );
         });
-      }
+  }
 }
