@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_cycles/main.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   runApp(
@@ -201,13 +203,13 @@ class _FormUIState extends State<FormUI> {
 
   _sendData() async {
     DateTime endDate = startDate.add(Duration(days: duration));
-    fsi.collection('periodinfo').add({
+    FirebaseFirestore.instance.collection('periodinfo').add({
       "Cycle Length": cycleLength,
       "Duration": duration,
       "Flow": flow,
       "Selected Date": {
-        "start": startDate,
-        "end": endDate,
+        "start": formatter.format(startDate),
+        "end": formatter.format(endDate),
       }
     }).then((value) {
       print(value.id);

@@ -6,6 +6,9 @@ import 'package:flutter/rendering.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 // void main() async {
 //   runApp(
 //     MaterialApp(debugShowCheckedModeBanner: false, home: MyCycles()),
@@ -121,7 +124,10 @@ class MyInfo extends StatelessWidget {
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.pink[900])),
                   onPressed: () {
-                    fsi.collection(text).get().then((querySnapshot) {
+                    FirebaseFirestore.instance
+                        .collection(text)
+                        .get()
+                        .then((querySnapshot) {
                       querySnapshot.docs.forEach((result) {
                         print(result.data());
                         map = result.data();

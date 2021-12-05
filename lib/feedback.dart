@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_cycles/main.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   runApp(
@@ -112,14 +114,16 @@ class _FormUIState extends State<FormUI> {
   int rate = 0;
   String reason = 'lorem ipsum';
   String comments = 'shuwbjqndqscisqmcqpmxqwmxiw';
+  DateTime currentDate = DateTime.now();
 
   _sendData() async {
-    fsi.collection('feedback').add({
+    FirebaseFirestore.instance.collection('feedback').add({
       "Name": name,
       "Age": age,
       "Rate": rate,
       "Reason": reason,
       "Comments": comments,
+      "Date": currentDate,
     }).then((value) {
       print(value.id);
       final snackBar = SnackBar(

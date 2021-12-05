@@ -17,8 +17,13 @@ FirebaseFirestore fsi = FirebaseFirestore.instance;
 const magenta = const Color(0x8e3a59);
 int _currentIndex = 1;
 int _pageIndex = 1;
+
+var startDates = [];
+var endDates = [];
+Map<String, dynamic> map;
+Map<String, dynamic> selectedDateValue;
 void main() async {
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -64,6 +69,45 @@ class _MyCycleState extends State<MyCycles> {
     super.initState();
     _controller = CalendarController();
     initializeFlutterFire();
+    _getPeriodData();
+  }
+
+  _getPeriodData() async {
+    FirebaseFirestore.instance
+        .collection("periodinfo")
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+        print(result.data());
+        map = result.data();
+        selectedDateValue = map['Selected Date'];
+        var temp1 = DateFormat('yyyy-MM-dd').parse(selectedDateValue['start']);
+        startDates.add(temp1);
+        var temp2 = DateFormat('yyyy-MM-dd').parse(selectedDateValue['end']);
+        endDates.add(temp2);
+        print(startDates);
+        print(endDates);
+      });
+    });
+  }
+
+  _getStartDate() {
+    if (startDates.length > 0) {
+      print('here');
+      print(startDates[0]);
+      print(startDates);
+      return startDates[0];
+    } else {
+      return null;
+    }
+  }
+
+  _getEndDate() {
+    if (startDates.length > 0) {
+      return endDates[0];
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -147,17 +191,28 @@ class _MyCycleState extends State<MyCycles> {
                 TableCalendar(
                   initialCalendarFormat: CalendarFormat.month,
                   weekendDays: [],
+                  startDay: _getStartDate(),
+                  endDay: _getEndDate(),
                   calendarStyle: CalendarStyle(
+                      unavailableStyle: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
                       weekendStyle: TextStyle(
-                          color: Colors.pink[900], fontWeight: FontWeight.bold),
+                        color: Colors.pink[900],
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
                       outsideStyle: TextStyle(color: Colors.pink[900]),
                       outsideWeekendStyle: TextStyle(color: Colors.pink[900]),
                       weekdayStyle: TextStyle(
-                          color: Colors.pink[900], fontWeight: FontWeight.bold),
+                        color: Colors.pink[900],
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
                       todayColor: Colors.pink[900],
-                      selectedColor: Theme.of(context).primaryColor,
+                      // selectedColor: Theme.of(context).primaryColor,
                       todayStyle: TextStyle(
                           fontWeight: FontWeight.bold,
+                          decorationStyle: TextDecorationStyle.wavy,
                           fontSize: 20.0,
                           color: Colors.white)),
                   headerStyle: HeaderStyle(
@@ -541,7 +596,7 @@ class _MyCycleState extends State<MyCycles> {
                 onPressed: () {
                   DateTime now = new DateTime.now();
                   String dateValue = formatter.format(now);
-                  fsi.collection(collection_name).add({
+                  FirebaseFirestore.instance.collection(collection_name).add({
                     "Value": valueText,
                     "Date": dateValue,
                   }).then((value) {
