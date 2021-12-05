@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 FirebaseFirestore fsi = FirebaseFirestore.instance;
 
@@ -212,7 +213,7 @@ class _MyCycleState extends State<MyCycles> {
                       // selectedColor: Theme.of(context).primaryColor,
                       todayStyle: TextStyle(
                           fontWeight: FontWeight.bold,
-                          decorationStyle: TextDecorationStyle.wavy,
+                          fontFamily: 'Poppins',
                           fontSize: 20.0,
                           color: Colors.white)),
                   headerStyle: HeaderStyle(
@@ -221,12 +222,14 @@ class _MyCycleState extends State<MyCycles> {
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1,
-                        fontSize: 22.0),
+                        fontSize: 22.0,
+                        fontFamily: 'Poppins'),
                     formatButtonDecoration: BoxDecoration(
                       color: Colors.pink[900],
                       borderRadius: BorderRadius.circular(22.0),
                     ),
-                    formatButtonTextStyle: TextStyle(color: Colors.white),
+                    formatButtonTextStyle:
+                        TextStyle(color: Colors.white, fontFamily: 'Poppins'),
                     formatButtonShowsNext: false,
                   ),
                   startingDayOfWeek: StartingDayOfWeek.monday,
@@ -243,7 +246,8 @@ class _MyCycleState extends State<MyCycles> {
                             borderRadius: BorderRadius.circular(8.0)),
                         child: Text(
                           date.day.toString(),
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                              color: Colors.white, fontFamily: 'Poppins'),
                         )),
                     todayDayBuilder: (context, date, events) => Container(
                         margin: const EdgeInsets.all(5.0),
@@ -253,7 +257,8 @@ class _MyCycleState extends State<MyCycles> {
                             borderRadius: BorderRadius.circular(8.0)),
                         child: Text(
                           date.day.toString(),
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                              color: Colors.white, fontFamily: 'Poppins'),
                         )),
                   ),
                   calendarController: _controller,
@@ -268,12 +273,13 @@ class _MyCycleState extends State<MyCycles> {
                             height: 50,
                             width: 300,
                             child: Padding(
-                                padding: EdgeInsets.fromLTRB(100, 10, 40, 10),
+                                padding: EdgeInsets.fromLTRB(100, 0, 40, 10),
                                 child: Text("Add Period",
                                     style: TextStyle(
-                                        fontSize: 30,
+                                        fontSize: 28,
                                         color: Colors.pink[900],
-                                        fontWeight: FontWeight.bold)))),
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Poppins')))),
                         Divider(),
                         SizedBox(
                           child: FloatingActionButton(
@@ -312,7 +318,8 @@ class _MyCycleState extends State<MyCycles> {
                                       "BODY TEMPERATURE",
                                       style: TextStyle(
                                           color: Colors.pink[200],
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Poppins'),
                                     )))),
                       ],
                     ),
@@ -338,7 +345,8 @@ class _MyCycleState extends State<MyCycles> {
                                       "MOOD",
                                       style: TextStyle(
                                           color: Colors.pink[200],
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Poppins'),
                                     )))),
                       ],
                     ),
@@ -364,7 +372,8 @@ class _MyCycleState extends State<MyCycles> {
                                       "WEIGHT",
                                       style: TextStyle(
                                           color: Colors.pink[200],
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Poppins'),
                                     )))),
                       ],
                     ),
@@ -443,7 +452,8 @@ class _MyCycleState extends State<MyCycles> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -467,7 +477,8 @@ class _MyCycleState extends State<MyCycles> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       _displayTextInputDialog(context, "Medicine", "medicine");
@@ -488,7 +499,8 @@ class _MyCycleState extends State<MyCycles> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(context,
@@ -510,7 +522,8 @@ class _MyCycleState extends State<MyCycles> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.pink[100],
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins'),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -537,6 +550,7 @@ class _MyCycleState extends State<MyCycles> {
                           fontSize: 20,
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
                         ),
                         textAlign: TextAlign.right,
                       ),
@@ -579,7 +593,8 @@ class _MyCycleState extends State<MyCycles> {
                 ),
                 child: Text(
                   'CANCEL',
-                  style: TextStyle(color: Colors.pink[50]),
+                  style:
+                      TextStyle(color: Colors.pink[50], fontFamily: 'Poppins'),
                 ),
                 onPressed: () {
                   setState(() {
@@ -592,7 +607,9 @@ class _MyCycleState extends State<MyCycles> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.pink[900]),
                 ),
-                child: Text('SUBMIT', style: TextStyle(color: Colors.pink[50])),
+                child: Text('SUBMIT',
+                    style: TextStyle(
+                        color: Colors.pink[50], fontFamily: 'Poppins')),
                 onPressed: () {
                   DateTime now = new DateTime.now();
                   String dateValue = formatter.format(now);
