@@ -132,7 +132,7 @@ class _AboutUsState extends State<AboutUs> {
                 children: [
                   Divider(),
                   ContactUs(
-                    companyName: "Aditi Kulkarni",
+                    companyName: "Dhruv Joshi",
                     textColor: Colors.white,
                     textFont: 'Poppins',
                     cardColor: Colors.pink[900],
@@ -140,11 +140,11 @@ class _AboutUsState extends State<AboutUs> {
                     companyColor: Colors.pink,
                     taglineColor: Colors.pink,
                     taglineFont: 'Poppins',
-                    email: "aditi.hk@somaiya.edu",
-                    phoneNumber: '+91- 9820623217',
+                    email: "joshi.dd@somaiya.edu",
+                    phoneNumber: '+91- 9899999999',
                     taglineFontWeight: FontWeight.normal,
-                    logo: AssetImage('assets/aditi.jpeg'),
-                    tagLine: " Student, KJSCE TY IT ",
+                    logo: AssetImage('assets/pooja.jpeg'),
+                    tagLine: "KJSCE TY IT ",
                     dividerColor: Colors.black38,
                   ),
                   Divider(),
@@ -161,7 +161,7 @@ class _AboutUsState extends State<AboutUs> {
                     phoneNumber: '+91- 9619105432',
                     logo: AssetImage('assets/pooja.jpeg'),
                     taglineFontWeight: FontWeight.normal,
-                    tagLine: " Student, KJSCE TY IT ",
+                    tagLine: " KJSCE TY IT ",
                     dividerColor: Colors.black38,
                   )
                 ]),
